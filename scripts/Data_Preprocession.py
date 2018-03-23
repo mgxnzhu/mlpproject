@@ -123,7 +123,7 @@ def smote_oversample(df, lebal, val, n_sample, k_neighbor, n_gen, rng=None):
 # train : test : valid = 0.6 : 0.2 : 0.2 
 train_df, evalu = split_DataFrame(data, label='Class', frac=0.6, rng=rng)
 #train_df = oversample(train_df, label='Class', rng=rng)
-train_df = smote_oversample(train_df, 'Class', 1, 280, 140, 700, rng=rng)
+train_df = smote_oversample(train_df, 'Class', 1, 280, 140, 500, rng=rng)
 test_df, valid_df = split_DataFrame(evalu, label='Class', frac=0.5, rng=rng)
 
 train = train_df.as_matrix()
