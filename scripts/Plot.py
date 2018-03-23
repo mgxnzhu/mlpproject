@@ -6,7 +6,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
-models = [f[:-4] for f in os.listdir('../stats/') if f.endswith(".npy")]
+STAT_DIR = '/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/stats/'
+models = [f[:-4] for f in os.listdir(STAT_DIR) if f.endswith(".npy")]
+#STAT_DIR = '/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/scripts/'
 #models = ['test']
 num_steps = 500
 colors = ['#204594', '#95B333', '#FD9D59', '#F585A5', '#CDB460', '#3AB5D4', '#B72220', '#FEE30E', '#319848', '#5f1250', '#e7221a']
@@ -14,7 +16,7 @@ colors = ['#204594', '#95B333', '#FD9D59', '#F585A5', '#CDB460', '#3AB5D4', '#B7
 fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(111)
 for modelname, colorname in zip(models, colors):
-    stats = np.load('../stats/'+modelname+".npy")
+    stats = np.load(STAT_DIR+modelname+".npy")
     ax.plot(range(num_steps), stats[:,0], label=modelname+"_loss(train)", color=colorname, alpha=0.5, linestyle='--')
     ax.plot(range(num_steps), stats[:,3], label=modelname+"_loss(val)", color=colorname)
 lgd = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
@@ -29,7 +31,7 @@ fig.savefig("loss.pdf", bbox_extra_artists=(fig,), bbox_inches='tight')
 fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(111)
 for modelname, colorname in zip(models, colors):
-    stats = np.load(modelname+".npy")
+    stats = np.load(STAT_DIR+modelname+".npy")
     ax.plot(range(num_steps), stats[:,1], label="acc(train)", color=colorname, alpha=0.5, linestyle='--')
     ax.plot(range(num_steps), stats[:,4], label="acc(val)", color=colorname)
 lgd = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
@@ -58,7 +60,7 @@ fig.savefig("f1.pdf", bbox_extra_artists=(fig,), bbox_inches='tight')
 
 maxf1 = {}
 for modelname in models:
-    stats = np.load('../stats/'+modelname+".npy")
+    stats = np.load(STAT_DIR+modelname+".npy")
     maxf1.update({modelname:stats[:,5].max()})
 
 fig = plt.figure(figsize=(8,6))

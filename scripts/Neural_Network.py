@@ -3,7 +3,7 @@
 import numpy as np
 import tensorflow as tf
 
-DATA_DIR = "../data/"
+DATA_DIR = "/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/data/"
 
 n_input = 28
 n_classes = 2
