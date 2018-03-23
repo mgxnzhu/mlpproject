@@ -8,7 +8,7 @@ DATA_DIR = "../data/"
 n_input = 28
 n_classes = 2
 learning_rate = 0.0001
-num_steps = 500
+num_steps = 75
 batch_size = 100
 display_step = 25
 

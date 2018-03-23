@@ -32,8 +32,8 @@ fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(111)
 for modelname, colorname in zip(models, colors):
     stats = np.load(STAT_DIR+modelname+".npy")
-    ax.plot(range(num_steps), stats[:,1], label="acc(train)", color=colorname, alpha=0.5, linestyle='--')
-    ax.plot(range(num_steps), stats[:,4], label="acc(val)", color=colorname)
+    ax.plot(range(num_steps), stats[:,1], label=modelname+"_acc(train)", color=colorname, alpha=0.5, linestyle='--')
+    ax.plot(range(num_steps), stats[:,4], label=modelname+"_acc(val)", color=colorname)
 lgd = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
                ncol=2, mode="expand", borderaxespad=0)
 ax.set_xlim(0, num_steps)
@@ -46,7 +46,7 @@ fig.savefig("acc.pdf", bbox_extra_artists=(fig,), bbox_inches='tight')
 fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(111)
 for modelname, colorname in zip(models, colors):
-    stats = np.load('../stats/'+modelname+".npy")
+    stats = np.load(STAT_DIR+modelname+".npy")
     ax.plot(range(num_steps), stats[:,2], label=modelname+"_f1(train)", color=colorname, alpha=0.5, linestyle='--')
     ax.plot(range(num_steps), stats[:,5], label=modelname+"_f1(val)", color=colorname)
 lgd = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
