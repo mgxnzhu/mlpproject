@@ -8,7 +8,7 @@ DATA_DIR = "/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/data/"
 n_input = 28
 n_classes = 2
 learning_rate = 0.0001
-num_steps = 75
+num_steps = 500
 batch_size = 100
 display_step = 25
 
@@ -20,10 +20,18 @@ def slicedata(data, dataset):
     labels[range(labels_int.shape[0]), labels_int] = 1
     return features, labels
 
+import argparse
+
+parser = argparse.ArgumentParser(description='Set the evaluation dataset')
+parser.add_argument('--evaluation', nargs="?", type=str, default='valid',
+    help='"valid" or "test"')
+args = parser.parse_args()
+
+evalset = args.evaluation
+
 with np.load(DATA_DIR+"ccdataset.npz") as data:
     features, labels = slicedata(data, 'train')
-    features_valid, labels_valid = slicedata(data, 'valid')
-    features_test, labels_test = slicedata(data, 'test')
+    features_valid, labels_valid = slicedata(data, evalset)
 
 # Assume that each row of `features` corresponds to the same row as `labels`.
 assert features.shape[0] == labels.shape[0]
@@ -37,17 +45,7 @@ iterator = dataset.make_initializable_iterator()
 
 X, Y = iterator.get_next()
 
-modelname = "test"
-def Baseline_model(x, n_classes, reuse, is_training):
-    with tf.variable_scope('Baseline', reuse=reuse):
-        layer1 = tf.layers.dense(inputs=x, units=150, activation=tf.nn.leaky_relu)
-        layer2 = tf.layers.dense(inputs=layer1, units=150, activation=tf.nn.leaky_relu)
-        layer3 = tf.layers.dense(inputs=layer2, units=150, activation=tf.nn.leaky_relu)
-        layer4 = tf.layers.dense(inputs=layer3, units=150, activation=tf.nn.leaky_relu)
-        #layer5 = tf.layers.dense(inputs=layer4, units=150, activation=tf.nn.leaky_relu)
-        out = tf.layers.dense(inputs=layer4, units=n_classes)
-        out = tf.nn.softmax(out) if not is_training else out
-    return out
+from My_model import modelname, Baseline_model
 
 logits_train = Baseline_model(X, n_classes, reuse=False, is_training=True)
 logits_test = Baseline_model(X, n_classes, reuse=True, is_training=False)
@@ -103,7 +101,7 @@ for step in range(1, num_steps + 1):
 
     loss, acc, f1 = sess.run([loss_op, accuracy, fmeasure])
 
-    loss_val, acc_val, f1_val = sess.run([loss_val_op, acc_val_op, f1_val_op], feed_dict={_features_valid: features_test, _labels_valid: labels_test})
+    loss_val, acc_val, f1_val = sess.run([loss_val_op, acc_val_op, f1_val_op], feed_dict={_features_valid: features_valid, _labels_valid: labels_valid})
 
     stats.append([loss, acc, f1, loss_val, acc_val, f1_val])
 
