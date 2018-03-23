@@ -8,7 +8,7 @@ import os
 
 #STAT_DIR = '../stats/'
 #models = [f[:-4] for f in os.listdir(STAT_DIR) if f.endswith(".npy")]
-STAT_DIR = '../scripts/'
+STAT_DIR = '/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/scripts/'
 models = ['test_L5U150', 'test_L4U200', 'test_L3U150']
 num_steps = 100
 colors = ['#204594', '#95B333', '#FD9D59', '#F585A5', '#CDB460', '#3AB5D4', '#B72220', '#FEE30E', '#319848', '#5f1250', '#e7221a']

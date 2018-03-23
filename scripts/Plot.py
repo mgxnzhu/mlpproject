@@ -6,7 +6,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
-STAT_DIR = '../stats/'
+STAT_DIR = '/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/stats/'
 models = [f[:-4] for f in os.listdir(STAT_DIR) if f.endswith(".npy")]
 #STAT_DIR = '../scripts/'
 #models = ['test']

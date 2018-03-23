@@ -4,7 +4,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 
-DATA_DIR = "../data/"
+DATA_DIR = "/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/data/"
 DATA_FILE = "creditcard.csv"
 
 data = pd.read_csv(DATA_DIR+DATA_FILE)
