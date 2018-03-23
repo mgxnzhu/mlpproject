@@ -8,7 +8,6 @@ DATA_DIR = "../data/"
 n_input = 28
 n_classes = 2
 learning_rate = 0.0001
-num_steps = 75
 batch_size = 100
 display_step = 25
 
@@ -25,9 +24,12 @@ import argparse
 parser = argparse.ArgumentParser(description='Set the evaluation dataset')
 parser.add_argument('--evaluation', nargs="?", type=str, default='valid',
     help='"valid" or "test"')
+parser.add_argument('--steps', nargs="?", type=int, default=500,
+    help='Number of Trainning steps')
 args = parser.parse_args()
 
 evalset = args.evaluation
+num_steps = args.steps
 
 with np.load(DATA_DIR+"ccdataset.npz") as data:
     features, labels = slicedata(data, 'train')
