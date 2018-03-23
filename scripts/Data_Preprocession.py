@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 rng = np.random.RandomState(20180201)
 DEFAULT_SEED = 20180201
-DATA_DIR = "/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/data/"
+DATA_DIR = "../data/"
 DATA_FILE = "creditcard.csv"
 data = pd.read_csv(DATA_DIR+DATA_FILE)
 stats = pd.DataFrame({'mean':data.mean(), 'std':data.std(), 'skew':data.skew()})

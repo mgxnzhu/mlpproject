@@ -6,9 +6,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
-STAT_DIR = '/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/stats/'
+STAT_DIR = '../stats/'
 models = [f[:-4] for f in os.listdir(STAT_DIR) if f.endswith(".npy")]
-#STAT_DIR = '/afs/inf.ed.ac.uk/user/s17/s1749267/mlpproject/scripts/'
+#STAT_DIR = '../scripts/'
 #models = ['test']
 num_steps = 500
 colors = ['#204594', '#95B333', '#FD9D59', '#F585A5', '#CDB460', '#3AB5D4', '#B72220', '#FEE30E', '#319848', '#5f1250', '#e7221a']
