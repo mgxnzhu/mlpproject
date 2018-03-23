@@ -19,7 +19,7 @@ data.loc[:,'V1':'Amount'] = data.loc[:,'V1':'Amount'].apply(lambda x: (x-x.mean(
 #data.loc[:,'V1':'V28'] = data.loc[:,'V1':'V28'].apply(lambda x: (x-x.min())/(x.std(x.max()-x.min())))
 
 # plot the histograms of data in each axises
-plot=True
+plot=False
 if plot:
     pos_data = data[data["Class"]==1]
     neg_data = data[data["Class"]==0]
@@ -33,7 +33,6 @@ if plot:
         plt.ylabel("Probability Density")
         plt.legend()
         fig.savefig(key+"_Scaled.pdf")
-        break
 
 
 def split_DataFrame(data, label, frac, rng=None):
